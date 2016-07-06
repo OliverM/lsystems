@@ -47,10 +47,12 @@
   [agent sym] agent)
 
 (defn interpret-symbols
-  [agent syms] (reduce interpret agent syms))
+  [agent syms]
+  (reduce interpret agent syms))
 
 (defn rewrite-symbols
-  [rules symbols] (mapcat rules symbols))
+  [rules symbols]
+  (mapcat rules symbols))
 
 (def algae
   {:start [:a]
@@ -61,6 +63,14 @@
   {:start [:a]
    :a     [:a :right :b :right]
    :b     [:left :a :left :b]})
+
+(->> [:a]
+     (iterate
+      (partial rewrite-symbols algae))
+     (take 8)
+     (last))
+
+;; (:a :b :a :a :b :a :b :a :a :b :a :a :b :a :b :a :a :b :a :b :a :a :b :a :a :b :a :b :a :a :b :a :a :b)
 
 (->> [:start]
      (iterate (partial rewrite-symbols dragon-curve))
