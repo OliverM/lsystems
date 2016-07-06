@@ -52,6 +52,11 @@
 (defn rewrite-symbols
   [rules symbols] (mapcat rules symbols))
 
+(def algae
+  {:start [:a]
+   :a     [:a :b]
+   :b     [:a]})
+
 (def dragon-curve
   {:start [:a]
    :a     [:a :right :b :right]
